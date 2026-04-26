@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  # PostgreSQL 16 with pgvector extension
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: aria-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: aria_local
+      POSTGRES_DB: aria
+    volumes:
+      - aria-db-data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  # Local Ollama Instance
+  ollama:
+    image: ollama/ollama:latest
+    container_name: aria-ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - aria-ollama-data:/root/.ollama
+    restart: unless-stopped
+
+volumes:
+  aria-db-data:
+    name: aria-db-data
+  aria-ollama-data:
+    name: aria-ollama-data
