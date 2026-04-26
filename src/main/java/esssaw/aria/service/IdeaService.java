@@ -1,5 +1,6 @@
 package esssaw.aria.service;
 
+import esssaw.aria.dto.request.IdeaCreateRequest;
 import esssaw.aria.models.Idea;
 import esssaw.aria.repository.IdeaRepository;
 import lombok.RequiredArgsConstructor;
@@ -12,19 +13,17 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-@RequestMapping("/api/ideas")
 @RequiredArgsConstructor
 public class IdeaService {
 
-    @Autowired
     private final IdeaRepository ideaRepository;
 
     public List<Idea> getActiveIdeas() {
         return ideaRepository.findByIsConvertedFalseOrderByCreatedAtDesc();
     }
-    public Idea createIdea(String content) {
+    public Idea createIdea(IdeaCreateRequest request) {
         Idea idea = new Idea();
-        idea.setContent(content);
+        idea.setContent(request.content());
         return ideaRepository.save(idea);
 
     }

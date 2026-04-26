@@ -14,6 +14,7 @@ import java.util.UUID;
 @RequestMapping("/api/ideas")
 @RequiredArgsConstructor
 public class IdeaController {
+
     private final IdeaService ideaService;
 
     @GetMapping
@@ -23,7 +24,7 @@ public class IdeaController {
 
     @PostMapping
     public Idea createIdea(@RequestBody IdeaCreateRequest request) {
-        return ideaService.createIdea(request.content());
+        return ideaService.createIdea(request);
     }
 
     @DeleteMapping("/{id}")
