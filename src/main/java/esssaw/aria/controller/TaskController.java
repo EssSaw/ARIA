@@ -5,7 +5,6 @@ import esssaw.aria.models.Task;
 import esssaw.aria.service.TaskService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,7 +29,7 @@ public class TaskController {
 
     @PatchMapping("/{id}/done")
     public Task markTaskAsDone(@PathVariable UUID id) {
-        return taskService.markTaskASDone(id);
+        return taskService.markTaskAsDone(id);
     }
 
     @DeleteMapping("/{id}")
